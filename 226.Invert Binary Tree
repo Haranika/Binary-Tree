@@ -1,0 +1,19 @@
+LEETCODE PROBLEM:NO 226
+
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        rev(root);
+        return root;
+    }
+
+        void rev(TreeNode root){
+            if(root==null) return;
+        TreeNode temp=root.right;
+        root.right=root.left;
+        root.left=temp;
+    
+        rev(root.right);
+        rev(root.left);   
+        
+    }
+}
