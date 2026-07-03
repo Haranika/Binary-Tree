@@ -1,0 +1,60 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int val){
+        data=val;
+        left=null;
+        right=null;
+    }
+}
+
+public class Solution {
+    static void level(Node root){
+        Queue <Node> q=new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()){
+            Node t=q.poll();
+            System.out.print(t.data+" ");
+            if(t.left != null)
+                q.offer(t.left);
+            if(t.right != null)    
+                q.offer(t.right);
+        }
+         
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int [] arr=new int[n];
+        for(int i=0;i<n;i++){
+            arr[i]=sc.nextInt();
+        }
+        Queue <Node> q=new LinkedList<>();
+        Node root=new Node(arr[0]);
+        q.offer(root);
+        for(int i=1;i<n;i++){
+            Node t=q.poll();
+            if(arr[i]!=-1){
+                Node l=new Node(arr[i]);
+                t.left=l;
+                q.offer(l);
+            }
+            if(++i<n && arr[i]!=-1){
+                Node r=new Node(arr[i]);
+                t.right=r;
+                q.offer(r);
+            }
+            
+        }
+        
+        level(root);        
+    }
+}
