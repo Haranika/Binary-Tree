@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int val){
+        data=val;
+        left=null;
+        right=null;
+    }
+}
+public class Solution {
+    static void postorder(Node root){
+        if(root == null) return;
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print(root.data+" ");
+    }
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String [] arr=sc.nextLine().split(" ");
+        int n=arr.length;
+        Queue <Node> q=new LinkedList<>();
+        Node root=new Node(Integer.valueOf(arr[0]));
+        q.offer(root);
+        for(int i=1;i<n;i++){
+            Node t=q.poll();
+            if(!arr[i].equals("null")){                        //if input is given in string 
+                Node l=new Node(Integer.valueOf(arr[i]));
+                t.left=l;
+                q.offer(l);
+            }
+            if(++i<n && !arr[i].equals("null")){
+                Node r=new Node(Integer.valueOf(arr[i]));
+                t.right=r;
+                q.offer(r);
+        }
+        
+        }
+        postorder(root);
+        
+        
+    }
+}
